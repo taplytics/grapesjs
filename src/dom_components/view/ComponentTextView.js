@@ -61,33 +61,7 @@ module.exports = ComponentView.extend({
       const content = this.getChildrenContainer().innerHTML;
       const comps = model.get('components');
       comps.length && comps.reset();
-      model.set('content', '');
-
-      // If there is a custom RTE the content is just baked staticly
-      // inside 'content'
-      if (rte.customRte) {
-        // Avoid double content by removing its children components
-        // and force to trigger change
-        model.set('content', content);
-      } else {
-        const clean = model => {
-          model.set({
-            editable: 0,
-            highlightable: 0,
-            removable: 0,
-            draggable: 0,
-            copyable: 0,
-            toolbar: ''
-          });
-          model.get('components').each(model => clean(model));
-        };
-
-        // Avoid re-render on reset with silent option
-        model.trigger('change:content', model);
-        comps.add(content);
-        comps.each(model => clean(model));
-        comps.trigger('resetNavigator');
-      }
+      model.set('content', content);
     }
 
     this.rteEnabled = 0;
