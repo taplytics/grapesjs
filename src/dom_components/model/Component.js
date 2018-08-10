@@ -365,23 +365,6 @@ const Component = Backbone.Model.extend(Styleable).extend(
       this.get('classes').each(cls => classes.push(cls.get('name')));
       classes.length && (attributes.class = classes.join(' '));
 
-      // Check if we need an ID on the component
-      if (!has(attributes, 'id')) {
-        let hasStyle;
-
-        // If we don't rely on inline styling we have to check
-        // for the ID selector
-        if (avoidInline(em)) {
-          hasStyle = sm && sm.get(id, sm.Selector.TYPE_ID);
-        } else if (!isEmpty(this.getStyle())) {
-          hasStyle = 1;
-        }
-
-        if (hasStyle) {
-          attributes.id = this.getId();
-        }
-      }
-
       return attributes;
     },
 
@@ -661,10 +644,7 @@ const Component = Backbone.Model.extend(Styleable).extend(
         attr.style = style;
       }
 
-      return new this.constructor(
-        attr,
-        opts
-      );
+      return new this.constructor(attr, opts);
     },
 
     /**
