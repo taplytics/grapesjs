@@ -661,10 +661,7 @@ const Component = Backbone.Model.extend(Styleable).extend(
         attr.style = style;
       }
 
-      return new this.constructor(
-        attr,
-        opts
-      );
+      return new this.constructor(attr, opts);
     },
 
     /**
@@ -743,7 +740,6 @@ const Component = Backbone.Model.extend(Styleable).extend(
      */
     getAttrToHTML() {
       var attr = this.getAttributes();
-      delete attr.style;
       return attr;
     },
 
